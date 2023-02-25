@@ -9,4 +9,8 @@ export class CreateDocumentDto {
   @IsOptional()
   @IsString()
   content?: string;
+
+  @IsOptional()
+  @IsString({ each: true })
+  collobrators?: number[];
 }

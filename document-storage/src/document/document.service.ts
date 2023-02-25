@@ -9,9 +9,24 @@ export class DocumentService {
     @InjectModel('Document') private readonly documentModel: Model<Document>,
   ) {}
 
-  async create(title: string, content: string): Promise<Document> {
-    const createdDocument = new this.documentModel({ title, content });
+  async create(
+    title: string,
+    content: string,
+    owner: number,
+    collobrators?: number[],
+  ): Promise<Document> {
+    if (!collobrators) collobrators = [];
+    const createdDocument = new this.documentModel({
+      title,
+      content,
+      owner,
+      collobrators,
+    });
     return createdDocument.save();
+  }
+  async addCollobrators(id: string, collobrators: number[]): Promise<Document> {
+    const options = { new: true };
+    return this.documentModel.findByIdAndUpdate(id, { collobrators }, options);
   }
 
   async findAll(): Promise<Document[]> {

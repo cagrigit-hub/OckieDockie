@@ -1,4 +1,4 @@
-import { IsString, IsOptional } from 'class-validator';
+import { IsString, IsOptional, IsArray } from 'class-validator';
 
 export class UpdateDocumentDto {
   @IsOptional()
@@ -8,4 +8,10 @@ export class UpdateDocumentDto {
   @IsOptional()
   @IsString()
   content?: string;
+
+  @IsOptional()
+  @IsArray({
+    each: true,
+  })
+  collobrators?: number[];
 }
