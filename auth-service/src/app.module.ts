@@ -1,3 +1,4 @@
+import { User } from './users/user.entity';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -13,7 +14,7 @@ import { APP_PIPE } from '@nestjs/core';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      autoLoadEntities: true,
+      entities: [User],
       synchronize: true,
     }),
     AuthModule,

@@ -35,9 +35,4 @@ export class AuthController {
   async register(@Body() user: CreateUserDto) {
     return this.authService.register(user);
   }
-
-  @Get('env')
-  async getEnv() {
-    return process.env;
-  }
 }

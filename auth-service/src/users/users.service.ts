@@ -19,7 +19,7 @@ export class UsersService {
     try {
       await this.repo.save(newUser);
     } catch (error) {
-      throw error;
+      console.log(error);
     }
     return result;
   }

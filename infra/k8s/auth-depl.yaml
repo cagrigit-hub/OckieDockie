@@ -17,6 +17,17 @@ spec:
           image: cakitomakito/docauth:latest
           ports:
             - containerPort: 3000
+          env:
+            - name: POSTGRES_HOST
+              value: auth-postgresql-service
+            - name: POSTGRES_DB
+              value: auth_db
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: secretpass
+            - name: POSTGRES_PORT
+              value: "5432"
 
 ---
 apiVersion: v1
@@ -25,19 +36,8 @@ metadata:
   name: auth-srv
 spec:
   selector:
-    app: auth-srv
+    app: auth
   ports:
     - name: http
       port: 3000
       targetPort: 3000
-env:
-  - name: POSTGRES_HOST
-    value: auth-postgresql-service
-  - name: POSTGRES_DB
-    value: auth_db
-  - name: POSTGRES_USER
-    value: postgres
-  - name: POSTGRES_PASSWORD
-    value: secretpass
-  - name: POSTGRES_PORT
-    value: 5432
