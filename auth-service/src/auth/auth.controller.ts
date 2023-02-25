@@ -1,4 +1,3 @@
-import { LoginUserDto } from './dtos/login-user.dto';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { LocalAuthGuard } from './local-auth.guard';
 import {
@@ -27,7 +26,6 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {
-    console.log(req.body);
     return this.authService.login(req.body);
   }
 
