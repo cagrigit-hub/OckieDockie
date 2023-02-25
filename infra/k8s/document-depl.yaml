@@ -22,10 +22,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-srv
+  name: document-srv
 spec:
   selector:
-    app: auth
+    app: document
   ports:
     - name: http
       port: 3000

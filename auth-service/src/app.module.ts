@@ -37,7 +37,8 @@ import { RateLimitMiddleware } from './middleware/ratelimiter.middleware';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(CsrfMiddleware).forRoutes('*');
+    // we will turn this on later
+    // consumer.apply(CsrfMiddleware).forRoutes('*');
     consumer.apply(RateLimitMiddleware).forRoutes('*');
   }
 }
