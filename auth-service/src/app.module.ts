@@ -1,10 +1,16 @@
 import { User } from './users/user.entity';
-import { Module, ValidationPipe } from '@nestjs/common';
+import {
+  Module,
+  NestModule,
+  ValidationPipe,
+  MiddlewareConsumer,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { APP_PIPE } from '@nestjs/core';
+import { CsrfMiddleware } from './middleware/csrf.middleware';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -28,4 +34,8 @@ import { APP_PIPE } from '@nestjs/core';
     },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(CsrfMiddleware).forRoutes('*');
+  }
+}
