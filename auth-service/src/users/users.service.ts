@@ -13,7 +13,11 @@ export class UsersService {
     }
     return user;
   }
-  async createUser(user: User): Promise<Partial<User>> {
+  async createUser(user: {
+    username: string;
+    password: string;
+    salt: string;
+  }): Promise<Partial<User>> {
     const newUser = this.repo.create(user);
     const { password, salt, ...result } = newUser;
     try {

@@ -7,7 +7,7 @@ import { jwtConstants } from './constants';
 import { DocumentController } from './document.controller';
 import { DocumentSchema } from './document.schema';
 import { DocumentService } from './document.service';
-
+@Global()
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Document', schema: DocumentSchema }]),

@@ -1,3 +1,4 @@
+import { DocumentOwnerMiddleware } from './../middleware/DocumentOwner.middleware';
 import {
   Controller,
   Get,
@@ -8,6 +9,7 @@ import {
   Param,
   Request,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { DocumentService } from './document.service';
 import { CreateDocumentDto } from './dtos/create-document.dto';
@@ -44,6 +46,7 @@ export class DocumentController {
     return this.documentService.findOne(id);
   }
 
+  @UseInterceptors(DocumentOwnerMiddleware)
   @Put(':id')
   async update(
     @Param('id') id: string,
@@ -56,16 +59,18 @@ export class DocumentController {
     );
   }
 
+  @UseInterceptors(DocumentOwnerMiddleware)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<void> {
     return this.documentService.delete(id);
   }
 
+  @UseInterceptors(DocumentOwnerMiddleware)
   @Put(':id/collobrators')
   async addCollobrators(
     @Param('id') id: string,
-    @Body() collobrators: number[],
+    @Body() body: { collobrators: number[] },
   ): Promise<Document> {
-    return this.documentService.addCollobrators(id, collobrators);
+    return this.documentService.upsertCollaborators(id, body.collobrators);
   }
 }

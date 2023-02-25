@@ -1,3 +1,4 @@
+import { DocumentOwnerMiddleware } from './middleware/DocumentOwner.middleware';
 import { JwtMiddleware } from './middleware/JwtMiddleware.middleware';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
@@ -21,5 +22,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(JwtMiddleware).forRoutes('*');
+
+    consumer.apply(DocumentOwnerMiddleware).forRoutes('/create-user/:id');
   }
 }

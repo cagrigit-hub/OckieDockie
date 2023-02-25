@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: document
-          image: cakitomakito/document:latest
+          image: cakitomakito/document
           ports:
             - containerPort: 3001
 

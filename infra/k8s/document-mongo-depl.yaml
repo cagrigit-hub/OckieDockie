@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: document-mongo-depl
 spec:
-  replicas: 3
+  # replicas will be 3 in production
+  replicas: 1
   selector:
     matchLabels:
       app: document-mongo
