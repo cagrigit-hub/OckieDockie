@@ -16,3 +16,12 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+
+    - image: cakitomakito/document
+      context: document-storage
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
