@@ -14,7 +14,7 @@ import { DocumentService } from './document.service';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '7d' },
     }),
   ],
   controllers: [DocumentController],
