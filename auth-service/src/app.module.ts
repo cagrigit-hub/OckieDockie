@@ -11,6 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { APP_PIPE } from '@nestjs/core';
 import { CsrfMiddleware } from './middleware/csrf.middleware';
+import { RateLimitMiddleware } from './middleware/ratelimiter.middleware';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -37,5 +38,6 @@ import { CsrfMiddleware } from './middleware/csrf.middleware';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(CsrfMiddleware).forRoutes('*');
+    consumer.apply(RateLimitMiddleware).forRoutes('*');
   }
 }
